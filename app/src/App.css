@@ -36,7 +36,27 @@ body{
 
 .user-data{
   flex:1;
-  border:1px solid blue;
-  border-radius: 20px;
-  padding: 20px;
+  padding: 10px;
+}
+
+.user-data button{
+  border-radius: 10px;
+  background-color: aquamarine;
+  border-color: aquamarine;
+}
+
+.search-outer{
+  width:100%;
+  height: 100px;
+  background-color: azure;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px;
+}
+
+.search-outer button{
+ border-radius: 10px;
+ background-color: aquamarine;
+ border-color: aquamarine;
 }

@@ -1,26 +1,81 @@
 import './App.css'
 
-const user1={avatar:'https://img.freepik.com/premium-vector/cute-boy-multitasking-cartoon-vector-icon-illustration-people-technology-icon-concept-isolated-premium-vector-flat-cartoon-style_138676-3973.jpg?w=360', name:'Yuki Hayashi', designation:'Java Developer', salary:15000};
-const user2={avatar:'https://img.freepik.com/premium-vector/cute-boy-working-computer-cartoon-vector-icon-illustration-people-technology-icon-concept-isolated-premium-vector-flat-cartoon-style_138676-4024.jpg?w=360', name:'Jonathan King', designation:'Angular Developer', salary:20000};
-const user3={avatar:'https://img.freepik.com/premium-vector/cute-girl-working-laptop-cartoon-vector-icon-illustration-people-technology-icon-concept-isolated-premium-vector-flat-cartoon-style_138676-3975.jpg?w=360', name:'Machiko Watanabe', designation:'React Developer', salary:25000};
-const user4={avatar:'https://img.freepik.com/premium-vector/cute-man-working-office-cartoon-vector-icon-illustration-people-technology-icon-concept-isolated_138676-5701.jpg?semt=ais_hybrid', name:'Simon Patterson', designation:'Electron Developer', salary:35000};
+const users=[
+  {
+    avatar:'https://img.freepik.com/premium-vector/cute-boy-multitasking-cartoon-vector-icon-illustration-people-technology-icon-concept-isolated-premium-vector-flat-cartoon-style_138676-3973.jpg?w=360',
+    name:'Yuki Hayashi', 
+    designation:'Java Developer', 
+    salary:15000,
+    code:1
+  },
+
+  {
+    avatar:'https://img.freepik.com/premium-vector/cute-boy-working-computer-cartoon-vector-icon-illustration-people-technology-icon-concept-isolated-premium-vector-flat-cartoon-style_138676-4024.jpg?w=360',
+   name:'Jonathan King',
+   designation:'Angular Developer', 
+   salary:20000,
+   code:2
+  },
+
+  {
+    avatar:'https://img.freepik.com/premium-vector/cute-girl-working-laptop-cartoon-vector-icon-illustration-people-technology-icon-concept-isolated-premium-vector-flat-cartoon-style_138676-3975.jpg?w=360',
+    name:'Machiko Watanabe',
+    designation:'React Developer',
+    salary:25000,
+    code:3
+  },
+
+  {
+    avatar:'https://img.freepik.com/premium-vector/cute-man-working-office-cartoon-vector-icon-illustration-people-technology-icon-concept-isolated_138676-5701.jpg?semt=ais_hybrid',
+    name:'Simon Patterson', 
+    designation:'Electron Developer', 
+    salary:35000,
+    code:4
+  }
+
+  ];
+
 
 function UserManager(){
 return(
   <div className='wrapper'>
-      <User avatar={user1.avatar} name={user1.name} designation={user1.designation} salary={user1.salary}/>  
-      <User avatar={user2.avatar} name={user2.name} designation={user2.designation} salary={user2.salary}/>
-      <User avatar={user3.avatar} name={user3.name} designation={user3.designation} salary={user3.salary}/>
-      <User avatar={user4.avatar} name={user4.name} designation={user4.designation} salary={user4.salary}/>
+   <SearchForm/>
+   <hr/>
+    {users.map((user)=>{
+        return <User {...user} key={user.code}/>
+    })};
+
   </div>
 );
 }
 
+const SearchForm=()=>{
+    const manageChangeEvent=(e)=>{
+          console.log(e.target.value);
+    }
+
+    const manageClickEvent=(e)=>{
+          console.log('Click Event');
+    }
+
+    const manageSubmitEvent=(e)=>{
+      e.preventDefault();
+      console.log('Click Event');
+}
+
+    return (
+    <div className='search-outer'>
+        <form onSubmit={manageSubmitEvent}>  
+            <input type="search" onChange={manageChangeEvent}/> &nbsp;
+            <button type="submit" onClick={manageClickEvent}>Search Now</button>
+        </form>
+    </div>
+  )
+}
+
 const User=(props)=>{
-  const {avatar}=props;
-  const {name}=props;
-  const {designation}=props;
-  const {salary}=props;
+  console.log(props);
+  const {avatar,name,designation,salary}=props;
   
   return(
     <div className='user-outer'>
@@ -42,8 +97,8 @@ const Avatar=({avatar})=>{
 }
 
 const UserData=({name,designation,salary,children})=>{
-  console.log(children);
-return(
+
+  return(
   <div className='user-data'>
     <UserName name={name}/>
     <Designation designation={designation}/>
@@ -51,15 +106,17 @@ return(
     <p>
       {children}
     </p>
+    <button style={{cursor:'pointer'}} onClick={(e)=>{console.log(name)}}>Print Data</button>
   </div>
 )
- 
+ }
 
-}
+
 
 const UserName=({name})=>{
   const inlineStyle={
-    color:'#2980b9'
+    color:'#2980b9',
+    margin:0
   }
   
   return(
@@ -69,13 +126,13 @@ const UserName=({name})=>{
 
 const Designation=({designation})=>{
   return(
-    <h3 style={{fontStyle:'italic'}}>{designation}</h3>
+    <h3 style={{fontStyle:'italic',margin:0}}>{designation}</h3>
   )
 }
 
 const Salary=({salary})=>{
   return(
-    <h3 style={{fontStyle:'italic'}}>{salary}</h3>
+    <h3 style={{fontStyle:'italic',margin:0}}>{salary}</h3>
   )
 }
 export default UserManager;
